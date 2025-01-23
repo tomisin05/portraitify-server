@@ -10,17 +10,10 @@ export const config = {
   },
 };
 
-async function getRawBody(req) {
-  const chunks = [];
-  for await (const chunk of req) {
-    chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
-  }
-  return Buffer.concat(chunks);
-}
 
 export async function POST(req) {
   try {
-    const rawBody = req.text();
+    const rawBody = req.body;
     const sig = req.headers.get('stripe-signature');
 
     let event;
