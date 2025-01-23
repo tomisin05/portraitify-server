@@ -156,8 +156,10 @@ app.use(cors({ origin: 'https://portraitify.vercel.app' })); // Replace with you
 app.post('/api/webhook',  express.raw({ type: 'application/json' }), async (req, res) => {
     // console.log('Raw body:', req.body.toString()); // Log the raw body
     const sig = req.headers['stripe-signature'];
+    console.log('Signature:', sig);
     let event;
 
+    console.log('Request details: ', req);
     try {
         event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
         // console.log("webhook event: ", event)
