@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
-import { db } from '../../src/lib/firebase/config';
 import { doc, updateDoc, increment, collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from './config.js';
 
 const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
 
@@ -241,4 +241,4 @@ const updateUserCredits = async (userId, amount) => {
 
 
 // Export for Vercel
-export default app;
+// export default app;
