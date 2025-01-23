@@ -152,7 +152,7 @@ app.post('/api/webhook',  express.raw({ type: 'application/json' }), async (req,
 
     // console.log('Request details: ', req);
     try {
-        event = stripe.webhooks.constructEvent(req, sig, process.env.STRIPE_WEBHOOK_SECRET);
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
         // console.log("webhook event: ", event)
     } catch (err) {
         console.error(`Webhook Error: ${err.message}`);
