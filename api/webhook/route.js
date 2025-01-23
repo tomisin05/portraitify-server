@@ -139,7 +139,6 @@ import express from 'express';
 import cors from 'cors';
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
-import bodyParser from 'body-parser';
 import { doc, getDoc, updateDoc, increment, collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from './config.js';
 
@@ -150,7 +149,6 @@ const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
 const app = express();
 
 app.use(cors({ origin: 'https://portraitify.vercel.app' })); // Replace with your frontend URL
-// app.use(bodyParser.raw({ type: 'application/json' }));
 
 // Webhook endpoint to handle Stripe events
 app.post('/api/webhook',  express.raw({ type: 'application/json' }), async (req, res) => {
@@ -159,7 +157,7 @@ app.post('/api/webhook',  express.raw({ type: 'application/json' }), async (req,
     // console.log('Signature:', sig);
     let event;
 
-    console.log('Request details: ', req);
+    // console.log('Request details: ', req);
     try {
         event = stripe.webhooks.constructEvent(req, sig, process.env.STRIPE_WEBHOOK_SECRET);
         // console.log("webhook event: ", event)
