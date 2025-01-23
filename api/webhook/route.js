@@ -20,7 +20,7 @@ async function getRawBody(req) {
 
 export async function POST(req) {
   try {
-    const rawBody = await getRawBody(req);
+    const rawBody = req.text();
     const sig = req.headers.get('stripe-signature');
 
     let event;
