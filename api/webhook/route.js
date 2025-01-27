@@ -56,7 +56,7 @@
 // const handleCheckoutSession = async (session, amount) => {
 //   const email = session.email;
 //   const userId = await getUserIdByEmail(email);
-
+ 
 //   if (userId) {
 //     console.log(`Updating credits for user ${userId} with amount ${amount}`);
 //     await updateUserCredits(userId, amount);
