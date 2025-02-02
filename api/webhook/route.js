@@ -1,6 +1,7 @@
 // import Stripe from 'stripe';
 // import { doc, updateDoc, increment, collection, query, where, getDocs } from 'firebase/firestore';
 // import { db } from './config.js';
+// import * as express from 'express';
 
 // const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
 
@@ -9,6 +10,7 @@
 //     bodyParser: false,
 //   },
 // };
+
 
 
 // export async function POST(req) {
@@ -86,7 +88,10 @@
 //   });
 // };
 
-
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// }); 
 
 
 // import express from 'express';
@@ -97,14 +102,14 @@
 // dotenv.config();
 
 
-// // const express = require('express');
-// // const cors = require('cors');
-// // const stripe = require('stripe')(import.meta.env.VITE_STRIPE_SECRET_KEY); 
+// const express = require('express');
+// const cors = require('cors');
+// const stripe = require('stripe')(import.meta.env.VITE_STRIPE_SECRET_KEY); 
 // const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY); 
 
 // const app = express();
 // // app.use(cors());
-// app.use(cors({ origin: 'http://localhost:5173' })); // Replace with your frontend URL
+// app.use(cors({ origin: 'http://localhost:5175' })); // Replace with your frontend URL
 
 // app.use(express.json());
 
@@ -122,7 +127,7 @@
 //     }
 // });
 
-// const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
 //     console.log(`Server is running on port ${PORT}`);
 // }); 
@@ -149,10 +154,11 @@ app.post('/api/webhook',  express.raw({ type: 'application/json' }), async (req,
     const sig = req.headers['stripe-signature'];
     // console.log('Signature:', sig);
     let event;
+    const body = req.body.toString();
 
     // console.log('Request details: ', req);
     try {
-        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+        event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET);
         // console.log("webhook event: ", event)
     } catch (err) {
         console.error(`Webhook Error: ${err.message}`);
@@ -233,5 +239,4 @@ app.listen(PORT, () => {
 
 
 
-// Export for Vercel
 export default app;
