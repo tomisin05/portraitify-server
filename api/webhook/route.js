@@ -1,7 +1,6 @@
 import Stripe from 'stripe';
 import { doc, updateDoc, increment, collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from './config.js';
-import * as express from 'express';
 
 const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
 
@@ -88,10 +87,10 @@ const updateUserCredits = async (userId, amount) => {
   });
 };
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-}); 
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// }); 
 
 
 // import express from 'express';
